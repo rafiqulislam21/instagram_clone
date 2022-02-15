@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from home_app.models import Posts
+from home_app.models import UserPost
 
 # model based serializers----------------   
-class PostsSerializer(serializers.ModelSerializer):
+class UserPostSerializer(serializers.ModelSerializer):
     # adding custom field without model serial
     # len_name = serializers.SerializerMethodField()
     
@@ -13,7 +13,7 @@ class PostsSerializer(serializers.ModelSerializer):
     # platform = serializers.CharField(source='platform.name')
     
     class Meta:
-        model = Posts
+        model = UserPost
         fields = "__all__"
     
     # field level validation

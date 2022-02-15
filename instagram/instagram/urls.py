@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.http import HttpResponse
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', include('home_app.api.urls')),
-    path('', include('home_app.api.urls')),
+    path('', lambda request: HttpResponse('Instagram root url page!')),
 ]

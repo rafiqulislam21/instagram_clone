@@ -3,7 +3,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import User
 
 # Create your models here.
-class Posts(models.Model):
+class UserPost(models.Model):
     # review_user = models.ForeignKey(User, on_delete=models.CASCADE)
     # watchlist = models.ForeignKey(WatchList, on_delete=models.CASCADE, related_name="reviews")
     

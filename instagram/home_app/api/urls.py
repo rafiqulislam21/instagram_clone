@@ -1,10 +1,9 @@
 from django.urls import path, include
 # from rest_framework.routers import DefaultRouter
-from home_app.api.views import PostsListView
+from home_app.api.views import UserPostListView, UserPostCreateView, UserPostDetailView
 
 urlpatterns = [
-    # path('<int:pk>/review-create/', ReviewCreate.as_view(), name='review-create'),
-    path('feeds/', PostsListView.as_view(), name='post-list'),
-    # path('review/<int:pk>/', ReviewDetails.as_view(), name='review-detail'),
-    
+    path('feed-create/', UserPostCreateView.as_view(), name='feed-create'),
+    path('feeds/', UserPostListView.as_view(), name='feed-list'),
+    path('feeds/<int:pk>/', UserPostDetailView.as_view(), name='feed-detail'),
 ]

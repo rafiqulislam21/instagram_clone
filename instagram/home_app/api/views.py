@@ -9,56 +9,34 @@ from rest_framework import generics
 from rest_framework import mixins
 from rest_framework import viewsets
 
-from home_app.models import Posts
+from home_app.models import UserPost
 
-from home_app.api.serializers import PostsSerializer
+from home_app.api.serializers import UserPostSerializer
 
 
 # Create your views here.
 
-# class ReviewCreate(generics.CreateAPIView):
-#     # queryset = Review.objects.all()
-#     serializer_class = ReviewSerializer
+class UserPostCreateView(generics.CreateAPIView):
+    serializer_class = UserPostSerializer
     
-#     #custom throttling, restriction of request(option 1----)
-#     throttle_classes = [ReviewCreateThrottle, AnonRateThrottle]
-    
-#     def get_queryset(self):
-#         return Review.objects.all()
+    def get_queryset(self):
+        return Review.objects.all()
 
-#     def perform_create(self, serializer):
-#         pk = self.kwargs.get('pk')
-#         watchlist = WatchList.objects.get(pk=pk)
+    def perform_create(self, serializer):
         
-#         review_user = self.request.user
-#         review_queryset = Review.objects.filter(watchlist=watchlist, review_user=review_user)
+        UserPost.caption = serializer.validated_data['caption']
+        UserPost.active = serializer.validated_data['active']
         
-#         if review_queryset.exists():
-#             raise ValidationError("Already reviewed this movie!")
-        
-#         if watchlist.number_rating == 0:
-#             watchlist.avg_rating = serializer.validated_data['rating']
-#         else:
-#             watchlist.avg_rating = (watchlist.avg_rating + serializer.validated_data['rating'])/2
-#         watchlist.number_rating += 1
-#         watchlist.save()
-        
-#         serializer.save(watchlist=watchlist, review_user=review_user)
+        serializer.save()
 
 
-class PostsListView(generics.ListAPIView):
-    queryset = Posts.objects.all()
-    serializer_class = PostsSerializer
+class UserPostListView(generics.ListAPIView):
+    queryset = UserPost.objects.all()
+    serializer_class = UserPostSerializer
 
 
-# class ReviewDetails(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Review.objects.all()
-#     serializer_class = ReviewSerializer
-#     # permission_classes = [IsAuthenticatedOrReadOnly] #permission_classes
-#     permission_classes = [IsReviewUserOrReadOnly] #custom permisson
-    
-#     #custom throttling, restriction of request(option 2----)
-#     throttle_classes = [ScopedRateThrottle]
-#     throttle_scope = 'review-details'
+class UserPostDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = UserPost.objects.all()
+    serializer_class = UserPostSerializer
 
 
