@@ -1,12 +1,14 @@
 # How to setup project
 
-### Creating virtual environment
+## Steps
+
+### Creating virtual environment (using cmd)
 
 ` python -m venv ienv `
 
-### Activate virtual environment (no need if using vscode)
+### Activate virtual environment
 
-` ienv\Scripts\activate `
+` .venv\Scripts\activate `
 
 ### Check installed packages
 
@@ -17,7 +19,7 @@
 ` pip install -r requirements.txt `
 ____
 
-# Initial commands used in create project
+## Initial commands used in create project
 
 ### Create django project
 
@@ -38,3 +40,8 @@ ____
 ` python manage.py createsuperuser `
 
 ____
+
+### Admin panel info
+
+- username: ` user `
+- passowrd: ` user `
