@@ -15,7 +15,6 @@ from home_app.api.serializers import UserPostSerializer
 
 
 # Create your views here.
-
 class UserPostCreateView(generics.CreateAPIView):
     serializer_class = UserPostSerializer
     
