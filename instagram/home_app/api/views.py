@@ -3,15 +3,16 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework import filters
 
-from rest_framework.views import APIView
+# from django_filters.rest_framework import DjangoFilterBackend
+
 from rest_framework import generics
-from rest_framework import mixins
-from rest_framework import viewsets
 
 from home_app.models import UserPost
 
 from home_app.api.serializers import UserPostSerializer
+from home_app.api.pagination import FeedCPagination, FeedPagination
 
 
 # Create your views here.
@@ -32,6 +33,15 @@ class UserPostCreateView(generics.CreateAPIView):
 class UserPostListView(generics.ListAPIView):
     queryset = UserPost.objects.all()
     serializer_class = UserPostSerializer
+    
+    #pagination
+    pagination_class = FeedPagination
+    
+    #search filter
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['caption']
+    # search_fields = ['=title', 'platform__name']
+    # url example: http://127.0.0.1:8000/home/feeds?search=nice
 
 
 class UserPostDetailView(generics.RetrieveUpdateDestroyAPIView):

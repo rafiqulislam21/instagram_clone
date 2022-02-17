@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+     'django_filters',
     'home_app',
 ]
 
@@ -123,3 +124,42 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    # 'DEFAULT_PERMISSION_CLASSES': [       #temporary auth from rest_framework
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ],
+
+    # 'DEFAULT_AUTHENTICATION_CLASSES': [
+    #     # 'rest_framework.authentication.TokenAuthentication',
+    #     # 'rest_framework.authentication.BasicAuthentication',
+    #     # 'rest_framework.authentication.SessionAuthentication',
+
+    #     # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+    # ],
+    
+    #throttling globals
+    # 'DEFAULT_THROTTLE_CLASSES': [
+    #     'rest_framework.throttling.AnonRateThrottle',
+    #     'rest_framework.throttling.UserRateThrottle'
+    # ],
+    # 'DEFAULT_THROTTLE_RATES': {
+    #     'anon': '5/day',
+    #     'user': '10/day',
+    #     'review-create': '2/day',
+    #     'review-list': '5/day',
+    #     'review-details': '5/day',
+    # },
+    
+    
+    # global pagination, working in generic class model
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.paginatwion.LimitOffsetPagination',
+    # 'PAGE_SIZE': 10
+
+    # set globally offset pagination
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination'
+
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
+}
