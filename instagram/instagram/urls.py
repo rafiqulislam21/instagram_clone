@@ -19,6 +19,6 @@ from django.http import HttpResponse
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', include('home_app.api.urls')),
+    path('feed/', include('home_app.api.urls')),
     path('', lambda request: HttpResponse('==========Instagram root url page!===========')),
 ]

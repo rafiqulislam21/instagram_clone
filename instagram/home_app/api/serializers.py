@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from home_app.models import UserPost
+from home_app.models import UserPost, Comment
 
 # model based serializers----------------   
 class UserPostSerializer(serializers.ModelSerializer):
@@ -23,11 +23,16 @@ class UserPostSerializer(serializers.ModelSerializer):
         return value      
 
 
-# class ReviewSerializer(serializers.ModelSerializer):
-#     review_user = serializers.StringRelatedField(read_only=True)
+class CommentSerializer(serializers.ModelSerializer):
+    # review_user = serializers.StringRelatedField(read_only=True)
     
-#     class Meta:
-#         model = Review
-#         # fields = "__all__"
-#         exclude = ("watchlist",)
+    class Meta:
+        model = Comment
+        fields = "__all__"
+        # exclude = ("watchlist",)
+    # field level validation
+    def validate_title(self, value):
+        if len(value) < 1:
+            raise serializers.ValidationError("Comment shouldn't empty")
+        return value  
  
