@@ -16,9 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.http import HttpResponse
+from rest_framework_swagger.views import get_swagger_view
+
+schema_view = get_swagger_view(title='Instagram api Documentations')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('feed/', include('home_app.api.urls')),
-    path('', lambda request: HttpResponse('==========Instagram root url page!===========')),
+    # path('', lambda request: HttpResponse('==========Instagram root url page!===========')),
+    path('', schema_view),
 ]
