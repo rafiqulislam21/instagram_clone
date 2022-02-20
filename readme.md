@@ -4,7 +4,7 @@
 
 ### Creating virtual environment (using cmd)
 
-` python -m venv ienv `
+` python -m venv .venv `
 
 ### Activate virtual environment
 
@@ -17,6 +17,10 @@
 ### Install packages from requirements.txt
 
 ` pip install -r requirements.txt `
+
+### export packages into requirements.txt
+
+` pip freeze > requirements.txt `
 ____
 
 ## Initial commands used in create project
@@ -45,3 +49,12 @@ ____
 
 - username: ` user `
 - passowrd: ` user `
+
+____
+
+### Api documentation
+
+Here root is `http://127.0.0.1:8000/`
+
+- `http://127.0.0.1:8000/api/schema/swagger-ui/#/`
+- `http://127.0.0.1:8000/api/schema/redoc`

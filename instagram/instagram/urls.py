@@ -16,13 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.http import HttpResponse
-from rest_framework_swagger.views import get_swagger_view
-
-schema_view = get_swagger_view(title='Instagram api Documentations')
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
 urlpatterns = [
+    # api documentation urls
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+
+    # project urls
     path('admin/', admin.site.urls),
     path('feed/', include('home_app.api.urls')),
     # path('', lambda request: HttpResponse('==========Instagram root url page!===========')),
-    path('', schema_view),
+    # path('', schema_view),
 ]
