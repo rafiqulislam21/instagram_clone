@@ -27,6 +27,6 @@ urlpatterns = [
     # project urls
     path('admin/', admin.site.urls),
     path('feed/', include('home_app.api.urls')),
-    # path('', lambda request: HttpResponse('==========Instagram root url page!===========')),
+    path('', lambda request: HttpResponse('==========Instagram root url page!===========')),
     # path('', schema_view),
 ]
