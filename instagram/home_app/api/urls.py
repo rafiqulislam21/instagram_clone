@@ -1,7 +1,8 @@
 from django.urls import path, include
 # from rest_framework.routers import DefaultRouter
 from home_app.api.views import (UserPostListView, UserPostCreateView, UserPostDetailView,
-                                commentCreateView, commentListView, commentDetailView)
+                                commentCreateView, commentListView, commentDetailView,
+                                saveUserPostView, unsaveUserPostView)
 
 urlpatterns = [
     path('create/', UserPostCreateView.as_view(), name='feed-create'),
@@ -13,6 +14,9 @@ urlpatterns = [
          commentCreateView.as_view(), name='comment-create'),
     path('<int:pk>/comments/', commentListView.as_view(), name='comment-list'),
     path('comments/<int:pk>/', commentDetailView.as_view(), name='comment-detail'),
+    
+    path('<int:pk>/save/', saveUserPostView.as_view(), name='save'),
+    path('unsave/<int:pk>/', unsaveUserPostView.as_view(), name='unsave'),
 ]
 
 # url example

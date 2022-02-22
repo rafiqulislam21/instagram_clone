@@ -25,3 +25,11 @@ class Comment(models.Model):
     def __str__(self):
         return str(self.title)
         # return str(self.caption) + " | " + self.watchlist.title + " | " + str(self.review_user)
+        
+class SaveUserPost(models.Model):
+    isSaved = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return "{} | {}".format(self.isSaved , self.created)

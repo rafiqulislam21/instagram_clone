@@ -9,9 +9,9 @@ from rest_framework import filters
 
 from rest_framework import generics
 
-from home_app.models import UserPost, Comment
+from home_app.models import UserPost, Comment, SaveUserPost
 
-from home_app.api.serializers import UserPostSerializer, CommentSerializer
+from home_app.api.serializers import UserPostSerializer, CommentSerializer, SaveUserPostSerializer
 from home_app.api.pagination import FeedCPagination, FeedPagination
 
 
@@ -19,6 +19,9 @@ from home_app.api.pagination import FeedCPagination, FeedPagination
 #==================user post====================================
 class UserPostCreateView(generics.CreateAPIView):
     serializer_class = UserPostSerializer
+    
+    #permission only for logged in users
+    permission_classes = [IsAuthenticated]
     
     def get_queryset(self):
         return Review.objects.all()
@@ -34,6 +37,9 @@ class UserPostCreateView(generics.CreateAPIView):
 class UserPostListView(generics.ListAPIView):
     queryset = UserPost.objects.all()
     serializer_class = UserPostSerializer
+    
+    #permission only for logged in users
+    permission_classes = [IsAuthenticated]
     
     #pagination
     pagination_class = FeedPagination
@@ -78,3 +84,19 @@ class commentDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CommentSerializer
 
 #=====================comments==================================
+
+#=====================save post==================================
+class saveUserPostView(generics.CreateAPIView):
+    serializer_class = SaveUserPostSerializer
+
+    def perform_create(self, serializer):
+
+        SaveUserPost.isSaved = serializer.validated_data['isSaved']
+        
+        serializer.save()
+        
+class unsaveUserPostView(generics.DestroyAPIView):
+    queryset = SaveUserPost.objects.all()
+    serializer_class = SaveUserPostSerializer
+
+#=====================save post==================================

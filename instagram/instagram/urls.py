@@ -19,14 +19,15 @@ from django.http import HttpResponse
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
 urlpatterns = [
-    # api documentation urls
+    # Authentication endpoints
+    path('account/', include('user_app.api.urls')),
+    # api documentation endpoints
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 
-    # project urls
+    # project endpoints
     path('admin/', admin.site.urls),
     path('feed/', include('home_app.api.urls')),
     path('', lambda request: HttpResponse('==========Instagram root url page!===========')),
-    # path('', schema_view),
 ]
