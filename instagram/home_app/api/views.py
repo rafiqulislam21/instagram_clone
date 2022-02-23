@@ -51,6 +51,9 @@ class UserPostListView(generics.ListAPIView):
 
 #details generic class with default delete, update
 class UserPostDetailView(generics.RetrieveUpdateDestroyAPIView):
+    #permission only for logged in users
+    permission_classes = [IsAuthenticated]
+    
     queryset = UserPost.objects.all()
     serializer_class = UserPostSerializer
 #==================user post====================================
@@ -59,6 +62,9 @@ class UserPostDetailView(generics.RetrieveUpdateDestroyAPIView):
 #=====================comments==================================
 class commentCreateView(generics.CreateAPIView):
     serializer_class = CommentSerializer
+    
+    #permission only for logged in users
+    permission_classes = [IsAuthenticated]
     
     def get_queryset(self):
         return Comment.objects.all()
@@ -75,6 +81,9 @@ class commentListView(generics.ListAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     
+    #permission only for logged in users
+    permission_classes = [IsAuthenticated]
+    
     #pagination
     pagination_class = FeedPagination
 
@@ -89,6 +98,9 @@ class commentDetailView(generics.RetrieveUpdateDestroyAPIView):
 class saveUserPostView(generics.CreateAPIView):
     serializer_class = SaveUserPostSerializer
 
+    #permission only for logged in users
+    permission_classes = [IsAuthenticated]
+    
     def perform_create(self, serializer):
 
         SaveUserPost.isSaved = serializer.validated_data['isSaved']
@@ -98,5 +110,8 @@ class saveUserPostView(generics.CreateAPIView):
 class unsaveUserPostView(generics.DestroyAPIView):
     queryset = SaveUserPost.objects.all()
     serializer_class = SaveUserPostSerializer
+    
+    #permission only for logged in users
+    permission_classes = [IsAuthenticated]
 
 #=====================save post==================================
