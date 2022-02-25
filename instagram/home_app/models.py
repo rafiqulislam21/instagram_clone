@@ -4,8 +4,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class UserPost(models.Model):
-    # review_user = models.ForeignKey(User, on_delete=models.CASCADE)
-    # watchlist = models.ForeignKey(WatchList, on_delete=models.CASCADE, related_name="reviews")
+    post_user = models.ForeignKey(User, on_delete=models.CASCADE)
     
     caption = models.CharField(max_length=400, null=True)
     active = models.BooleanField(default=True)
@@ -17,6 +16,8 @@ class UserPost(models.Model):
         # return str(self.caption) + " | " + self.watchlist.title + " | " + str(self.review_user)
 
 class Comment(models.Model):
+    comment_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
     title = models.CharField(max_length=200)
     active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -27,6 +28,8 @@ class Comment(models.Model):
         # return str(self.caption) + " | " + self.watchlist.title + " | " + str(self.review_user)
         
 class SaveUserPost(models.Model):
+    save_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
     isSaved = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

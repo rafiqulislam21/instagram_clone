@@ -13,7 +13,8 @@ class UserPostSerializer(serializers.ModelSerializer):
 
     # overrides the foreign key to another field
     # platform = serializers.CharField(source='platform.name')
-
+    post_user = serializers.StringRelatedField(read_only=True)
+    
     class Meta:
         model = UserPost
         fields = "__all__"
@@ -26,7 +27,7 @@ class UserPostSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    # review_user = serializers.StringRelatedField(read_only=True)
+    comment_user = serializers.StringRelatedField(read_only=True)
 
     class Meta:
         model = Comment
@@ -41,7 +42,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class SaveUserPostSerializer(serializers.ModelSerializer):
-    # review_user = serializers.StringRelatedField(read_only=True)
+    save_user = serializers.StringRelatedField(read_only=True)
     
     class Meta:
         model = SaveUserPost
