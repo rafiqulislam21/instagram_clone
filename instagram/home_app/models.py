@@ -17,6 +17,7 @@ class UserPost(models.Model):
 
 class Comment(models.Model):
     comment_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    userpost = models.ForeignKey(UserPost, on_delete=models.CASCADE, related_name="userpost")
     
     title = models.CharField(max_length=200)
     active = models.BooleanField(default=True)
@@ -29,6 +30,7 @@ class Comment(models.Model):
         
 class SaveUserPost(models.Model):
     save_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    userpost = models.ForeignKey(UserPost, on_delete=models.CASCADE, related_name="userpost")
     
     isSaved = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)

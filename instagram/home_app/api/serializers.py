@@ -9,7 +9,7 @@ class UserPostSerializer(serializers.ModelSerializer):
     # len_name = serializers.SerializerMethodField()
 
     # nested serializers/ one to many serializers
-    # reviews = ReviewSerializer(many=True, read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
 
     # overrides the foreign key to another field
     # platform = serializers.CharField(source='platform.name')
