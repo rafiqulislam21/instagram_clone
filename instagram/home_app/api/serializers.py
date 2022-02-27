@@ -47,6 +47,7 @@ class SaveUserPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = SaveUserPost
         fields = "__all__"
+        
     # field level validation
     def validate_title(self, value):
         if isSaved != True or isSaved != False:
