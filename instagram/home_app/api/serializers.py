@@ -4,6 +4,21 @@ from home_app.models import UserPost, Comment, SaveUserPost
 # model based serializers----------------
 
 
+class CommentSerializer(serializers.ModelSerializer):
+    comment_user = serializers.StringRelatedField(read_only=True)
+
+    class Meta:
+        model = Comment
+        fields = "__all__"
+        # exclude = ("watchlist",)
+    # field level validation
+
+    def validate_title(self, value):
+        if len(value) < 1:
+            raise serializers.ValidationError("Comment shouldn't empty")
+        return value
+
+
 class UserPostSerializer(serializers.ModelSerializer):
     # adding custom field without model serial
     # len_name = serializers.SerializerMethodField()
@@ -23,21 +38,6 @@ class UserPostSerializer(serializers.ModelSerializer):
     def validate_caption(self, value):
         if len(value) < 2:
             raise serializers.ValidationError("Caption is too short")
-        return value
-
-
-class CommentSerializer(serializers.ModelSerializer):
-    comment_user = serializers.StringRelatedField(read_only=True)
-
-    class Meta:
-        model = Comment
-        fields = "__all__"
-        # exclude = ("watchlist",)
-    # field level validation
-
-    def validate_title(self, value):
-        if len(value) < 1:
-            raise serializers.ValidationError("Comment shouldn't empty")
         return value
 
 
