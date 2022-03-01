@@ -9,9 +9,9 @@ from rest_framework import filters
 
 from rest_framework import generics
 
-from home_app.models import UserPost, Comment, SaveUserPost
+from home_app.models import UserPost, Comment, SaveUserPost, LikeUserPost
 
-from home_app.api.serializers import UserPostSerializer, CommentSerializer, SaveUserPostSerializer
+from home_app.api.serializers import UserPostSerializer, CommentSerializer, SaveUserPostSerializer, LikeUserPostSerializer
 from home_app.api.pagination import FeedCPagination, FeedPagination
 
 
@@ -110,6 +110,28 @@ class saveUserPostView(generics.CreateAPIView):
 class unsaveUserPostView(generics.DestroyAPIView):
     queryset = SaveUserPost.objects.all()
     serializer_class = SaveUserPostSerializer
+    
+    #permission only for logged in users
+    permission_classes = [IsAuthenticated]
+
+#=====================save post==================================
+
+#=====================save post==================================
+class likeUserPostView(generics.CreateAPIView):
+    serializer_class = LikeUserPostSerializer
+
+    #permission only for logged in users
+    permission_classes = [IsAuthenticated]
+    
+    def perform_create(self, serializer):
+
+        LikeUserPost.isSaved = serializer.validated_data['isLiked']
+        
+        serializer.save()
+        
+class unlikeUserPostView(generics.DestroyAPIView):
+    queryset = LikeUserPost.objects.all()
+    serializer_class = LikeUserPostSerializer
     
     #permission only for logged in users
     permission_classes = [IsAuthenticated]

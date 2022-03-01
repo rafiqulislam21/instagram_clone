@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from home_app.models import UserPost, Comment, SaveUserPost
+from home_app.models import UserPost, Comment, SaveUserPost, LikeUserPost
 
 # model based serializers----------------
 
@@ -51,6 +51,20 @@ class SaveUserPostSerializer(serializers.ModelSerializer):
     # field level validation
     def validate_title(self, value):
         if isSaved != True or isSaved != False:
+            raise serializers.ValidationError("isSaved should be True or False")
+        return value
+    
+    
+class LikeUserPostSerializer(serializers.ModelSerializer):
+    like_user = serializers.StringRelatedField(read_only=True)
+    
+    class Meta:
+        model = LikeUserPost
+        fields = "__all__"
+        
+    # field level validation
+    def validate_title(self, value):
+        if isLiked != True or isLiked != False:
             raise serializers.ValidationError("isSaved should be True or False")
         return value
  

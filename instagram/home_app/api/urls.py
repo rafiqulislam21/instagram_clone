@@ -2,7 +2,8 @@ from django.urls import path, include
 # from rest_framework.routers import DefaultRouter
 from home_app.api.views import (UserPostListView, UserPostCreateView, UserPostDetailView,
                                 commentCreateView, commentListView, commentDetailView,
-                                saveUserPostView, unsaveUserPostView)
+                                saveUserPostView, unsaveUserPostView, likeUserPostView,
+                                unlikeUserPostView)
 
 urlpatterns = [
     path('create/', UserPostCreateView.as_view(), name='feed-create'),
@@ -17,6 +18,9 @@ urlpatterns = [
     
     path('<int:pk>/save/', saveUserPostView.as_view(), name='save'),
     path('unsave/<int:pk>/', unsaveUserPostView.as_view(), name='unsave'),
+    
+    path('<int:pk>/like/', likeUserPostView.as_view(), name='like'),
+    path('unlike/<int:pk>/', unlikeUserPostView.as_view(), name='unlike'),
 ]
 
 # url example
